@@ -23,11 +23,6 @@ def get_reply_to_message(project_id, session_id, text, language_code):
     return response.query_result.fulfillment_text
 
 
-@bot.message_handler(commands=["start"])
-def start_work(message):
-    bot.send_message(message.chat.id, "Здравствуйте!")
-
-
 @bot.message_handler(content_types=["text"])
 def replie_to_message(message):
     response = get_reply_to_message(
