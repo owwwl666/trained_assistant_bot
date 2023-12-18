@@ -3,8 +3,8 @@ import json
 import logging
 
 from environs import Env
-from google.cloud import dialogflow
 from google.api_core.exceptions import InvalidArgument
+from google.cloud import dialogflow
 
 logging.basicConfig(format="%(levelname)s::%(message)s", level=logging.ERROR)
 logger = logging.getLogger("Intent")
@@ -37,8 +37,8 @@ if __name__ == "__main__":
     env = Env()
     env.read_env()
 
-    parser = argparse.ArgumentParser(description='Создает Intent в DialogFlow для дальнейшего обучения данных.')
-    parser.add_argument('json_path', help='Путь до Json файла с данными.')
+    parser = argparse.ArgumentParser(description="Создает Intent в DialogFlow для дальнейшего обучения данных.")
+    parser.add_argument("json_path", help="Путь до Json файла с данными.")
     args = parser.parse_args()
 
     with open(args.json_path, "r") as file:
@@ -56,4 +56,4 @@ if __name__ == "__main__":
                 message_texts=answer
             )
         except InvalidArgument:
-            logger.error(f'Intent with the display name {category} already exists.')
+            logger.error(f"Intent with the display name {category} already exists.")
