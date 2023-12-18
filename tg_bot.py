@@ -1,11 +1,6 @@
-import telebot
 from environs import Env
 from google.cloud import dialogflow
-
-env = Env()
-env.read_env()
-
-bot = telebot.TeleBot(env.str("TELEGRAM_BOT_TOKEN"))
+from telegram.ext import Updater, MessageHandler, Filters
 
 
 def get_reply_to_message(project_id, session_id, text, language_code):
@@ -23,17 +18,24 @@ def get_reply_to_message(project_id, session_id, text, language_code):
     return response.query_result.fulfillment_text
 
 
-@bot.message_handler(content_types=["text"])
-def replie_to_message(message):
+def replie_to_message(update, context):
     response = get_reply_to_message(
         project_id=env.str("GOOGLE_PROJECT_ID"),
-        session_id=message.chat.id,
-        text=message.text,
+        session_id=update.message.chat_id,
+        text=update.message.text,
         language_code="en-US"
     )
 
-    bot.send_message(message.chat.id, response)
+    context.bot.send_message(update.message.chat.id, response)
 
 
 if __name__ == "__main__":
-    bot.infinity_polling(none_stop=True)
+    env = Env()
+    env.read_env()
+
+    updater = Updater(env.str("TELEGRAM_BOT_TOKEN"))
+    dispatcher = updater.dispatcher
+
+    dispatcher.add_handler(MessageHandler(Filters.text, replie_to_message))
+
+    updater.start_polling()
