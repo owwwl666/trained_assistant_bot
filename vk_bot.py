@@ -32,4 +32,7 @@ if __name__ == "__main__":
 
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            replie_to_message(event, vk_api)
+            try:
+                replie_to_message(event, vk_api)
+            except vk.exceptions.ApiError:
+                pass
