@@ -2,12 +2,12 @@ import argparse
 import json
 import logging
 
+import telegram
 from environs import Env
 from google.api_core.exceptions import InvalidArgument
 from google.cloud import dialogflow
 
-logging.basicConfig(format="%(levelname)s::%(message)s", level=logging.ERROR)
-logger = logging.getLogger("Intent")
+from logger_bot import TelegramLogsHandler
 
 
 def create_intent(project_id, display_name, training_phrases_parts, message_texts):
@@ -36,6 +36,16 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
 if __name__ == "__main__":
     env = Env()
     env.read_env()
+
+    logger = logging.getLogger('logger')
+    log_bot = telegram.Bot(token=env.str('LOG_BOT_TOKEN'))
+
+    logging.basicConfig(format="%(levelname)s::%(message)s", level=logging.ERROR)
+    logger.addHandler(TelegramLogsHandler(
+        bot=log_bot,
+        chat_id=env.str("CHAT_ID")
+    )
+    )
 
     parser = argparse.ArgumentParser(description="Создает Intent в DialogFlow для дальнейшего обучения данных.")
     parser.add_argument("json_path", help="Путь до Json файла с данными.")
