@@ -2,11 +2,14 @@ import logging
 
 import telegram
 from environs import Env
-from telegram.ext import Updater, MessageHandler, Filters
+from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
 
 from logger_bot import TelegramLogsHandler
 from message_reply import get_reply_to_message
 
+
+def start_callback(update, _):
+    update.message.reply_text("Здравствуйте! Чем могу помочь?")
 
 def replie_to_message(update, context):
     response = get_reply_to_message(
@@ -36,6 +39,8 @@ if __name__ == "__main__":
     updater = Updater(env.str("TELEGRAM_BOT_TOKEN"))
 
     dispatcher = updater.dispatcher
+
+    dispatcher.add_handler(CommandHandler("start", start_callback))
     dispatcher.add_handler(MessageHandler(Filters.text, replie_to_message))
 
     try:
