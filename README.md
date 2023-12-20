@@ -32,3 +32,16 @@ python create_intent.py JSON_PATH
 Телеграм бот для общения с пользователем. Приветсвует пользователя, а также отвечает на вопросы, раннее занесенные в DialogFlow.
 
 [**Ссылка на бот**](https://t.me/dialiogflow_bot)
+
+![image](https://github.com/owwwl666/trained_assistant_bot/assets/131767856/8f1c512b-4b10-4a4e-a3f8-783d471b066f)
+
+### vk_bot.py
+
+ВК бот для общения с пользователем. Отвечает на вопросы, раннее занесенные в DialogFlow.
+
+[**Ссылка на бот**](https://vk.com/club223902533)
+
+![image](https://github.com/owwwl666/trained_assistant_bot/assets/131767856/d1a5aefb-9d9b-46b9-95da-876bf098a55f)
+
+
+
