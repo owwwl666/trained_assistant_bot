@@ -33,7 +33,7 @@ python create_intent.py JSON_PATH
 
 [**Ссылка на бот**](https://t.me/dialiogflow_bot)
 
-![image](https://github.com/owwwl666/trained_assistant_bot/assets/131767856/8f1c512b-4b10-4a4e-a3f8-783d471b066f)
+![image](https://dvmn.org/filer/canonical/1569214094/323/)
 
 ### vk_bot.py
 
@@ -41,7 +41,7 @@ python create_intent.py JSON_PATH
 
 [**Ссылка на бот**](https://vk.com/club223902533)
 
-![image](https://github.com/owwwl666/trained_assistant_bot/assets/131767856/67dd76bb-cdf3-4b20-9a08-7c0afd84b63e)
+![i](https://dvmn.org/filer/canonical/1569214089/322/)
 
 
 
