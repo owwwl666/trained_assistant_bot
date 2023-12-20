@@ -41,7 +41,8 @@ python create_intent.py JSON_PATH
 
 [**Ссылка на бот**](https://vk.com/club223902533)
 
-![image](https://github.com/owwwl666/trained_assistant_bot/assets/131767856/d1a5aefb-9d9b-46b9-95da-876bf098a55f)
+![image](https://github.com/owwwl666/trained_assistant_bot/assets/131767856/67dd76bb-cdf3-4b20-9a08-7c0afd84b63e)
+
 
 
 
