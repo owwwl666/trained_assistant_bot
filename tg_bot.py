@@ -14,12 +14,16 @@ def start_callback(update, _):
 def replie_to_message(update, context):
     response = get_reply_to_message(
         project_id=env.str("GOOGLE_PROJECT_ID"),
-        session_id=update.message.chat_id,
+        session_id=update.message.chat.id,
         text=update.message.text,
         language_code="en-US"
     )
 
     context.bot.send_message(update.message.chat.id, response)
+
+
+def handle_errors(update, context):
+    logger.error(Exception, exc_info=True)
 
 
 if __name__ == "__main__":
@@ -39,11 +43,8 @@ if __name__ == "__main__":
     updater = Updater(env.str("TELEGRAM_BOT_TOKEN"))
 
     dispatcher = updater.dispatcher
-
     dispatcher.add_handler(CommandHandler("start", start_callback))
     dispatcher.add_handler(MessageHandler(Filters.text, replie_to_message))
+    dispatcher.add_error_handler(handle_errors)
 
-    try:
-        updater.start_polling()
-    except Exception as err:
-        logger.error(err, exc_info=True)
+    updater.start_polling()
