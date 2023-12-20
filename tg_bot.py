@@ -9,9 +9,14 @@ from message_reply import get_reply_to_message
 
 
 def start_callback(update, _):
+    """Кнопка /start."""
     update.message.reply_text("Здравствуйте! Чем могу помочь?")
 
+
 def replie_to_message(update, context):
+    """Возвращает ответ на сообщение пользователя.
+
+    Если DialogFlow не знает ответ на вопрос пользователя, то выбрасывается исключение."""
     response = get_reply_to_message(
         project_id=env.str("GOOGLE_PROJECT_ID"),
         session_id=update.message.chat.id,
@@ -23,6 +28,7 @@ def replie_to_message(update, context):
 
 
 def handle_errors(update, context):
+    """Обработчик исключений."""
     logger.error(Exception, exc_info=True)
 
 

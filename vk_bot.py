@@ -11,6 +11,9 @@ from message_reply import get_reply_to_message
 
 
 def replie_to_message(event, vk_api):
+    """Возвращает ответ на сообщение пользователя.
+
+    Если DialogFlow не знает ответ на вопрос пользователя, то выбрасывается исключение."""
     response = get_reply_to_message(
         project_id=env.str("GOOGLE_PROJECT_ID"),
         session_id=event.user_id,
