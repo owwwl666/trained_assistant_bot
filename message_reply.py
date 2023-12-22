@@ -1,5 +1,6 @@
 from google.cloud import dialogflow
 
+
 def get_reply_to_message(project_id, session_id, text, language_code):
     session_client = dialogflow.SessionsClient()
 
@@ -11,5 +12,4 @@ def get_reply_to_message(project_id, session_id, text, language_code):
     response = session_client.detect_intent(
         request={"session": session, "query_input": query_input}
     )
-    if not response.query_result.intent.is_fallback:
-        return response.query_result.fulfillment_text
+    return response

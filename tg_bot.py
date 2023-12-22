@@ -14,9 +14,7 @@ def start_callback(update, _):
 
 
 def replie_to_message(update, context):
-    """Возвращает ответ на сообщение пользователя.
-
-    Если DialogFlow не знает ответ на вопрос пользователя, то выбрасывается исключение."""
+    """Возвращает ответ на сообщение пользователя."""
     response = get_reply_to_message(
         project_id=env.str("GOOGLE_PROJECT_ID"),
         session_id=update.message.chat.id,
@@ -24,7 +22,7 @@ def replie_to_message(update, context):
         language_code="en-US"
     )
 
-    context.bot.send_message(update.message.chat.id, response)
+    context.bot.send_message(update.message.chat.id, response.query_result.fulfillment_text)
 
 
 def handle_errors(update, context):
