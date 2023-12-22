@@ -52,11 +52,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     with open(args.json_path, "r") as file:
-        training_dataset = json.loads(file.read())
+        training_dataset = json.loads(file.read()).items()
 
-    for category in training_dataset:
-        questions = training_dataset[category]["questions"]
-        answer = training_dataset[category]["answer"]
+    for category, dialog in training_dataset:
+        questions = dialog["questions"]
+        answer = dialog["answer"]
 
         try:
             create_intent(
