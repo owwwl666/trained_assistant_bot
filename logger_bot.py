@@ -1,6 +1,6 @@
 import logging
 
-logger = logging.getLogger('logger')
+logger = logging.getLogger("logger")
 
 
 class TelegramLogsHandler(logging.Handler):
@@ -11,7 +11,4 @@ class TelegramLogsHandler(logging.Handler):
 
     def emit(self, record):
         log_entry = self.format(record)
-        self.bot.send_message(
-            chat_id=self.chat_id,
-            text=log_entry
-        )
+        self.bot.send_message(chat_id=self.chat_id, text=log_entry)

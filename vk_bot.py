@@ -18,14 +18,14 @@ def replie_to_message(event, vk_api):
         project_id=env.str("GOOGLE_PROJECT_ID"),
         session_id=event.user_id,
         text=event.text,
-        language_code="en-US"
+        language_code="en-US",
     )
 
     if not response.query_result.intent.is_fallback:
         vk_api.messages.send(
             user_id=event.user_id,
             message=response.query_result.fulfillment_text,
-            random_id=random.randint(1, 1000)
+            random_id=random.randint(1, 1000),
         )
 
 
@@ -33,15 +33,11 @@ if __name__ == "__main__":
     env = Env()
     env.read_env()
 
-    logger = logging.getLogger('logger')
-    log_bot = telegram.Bot(token=env.str('LOG_BOT_TOKEN'))
+    logger = logging.getLogger("logger")
+    log_bot = telegram.Bot(token=env.str("LOG_BOT_TOKEN"))
 
     logging.basicConfig(format="%(levelname)s::%(message)s", level=logging.ERROR)
-    logger.addHandler(TelegramLogsHandler(
-        bot=log_bot,
-        chat_id=env.str("CHAT_ID")
-    )
-    )
+    logger.addHandler(TelegramLogsHandler(bot=log_bot, chat_id=env.str("CHAT_ID")))
 
     vk_session = vk.VkApi(token=env.str("VK_BOT_TOKEN"))
     vk_api = vk_session.get_api()

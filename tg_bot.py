@@ -19,10 +19,12 @@ def replie_to_message(update, context):
         project_id=env.str("GOOGLE_PROJECT_ID"),
         session_id=update.message.chat.id,
         text=update.message.text,
-        language_code="en-US"
+        language_code="en-US",
     )
 
-    context.bot.send_message(update.message.chat.id, response.query_result.fulfillment_text)
+    context.bot.send_message(
+        update.message.chat.id, response.query_result.fulfillment_text
+    )
 
 
 def handle_errors(update, context):
@@ -34,15 +36,11 @@ if __name__ == "__main__":
     env = Env()
     env.read_env()
 
-    logger = logging.getLogger('logger')
-    log_bot = telegram.Bot(token=env.str('LOG_BOT_TOKEN'))
+    logger = logging.getLogger("logger")
+    log_bot = telegram.Bot(token=env.str("LOG_BOT_TOKEN"))
 
     logging.basicConfig(format="%(levelname)s::%(message)s", level=logging.ERROR)
-    logger.addHandler(TelegramLogsHandler(
-        bot=log_bot,
-        chat_id=env.str("CHAT_ID")
-    )
-    )
+    logger.addHandler(TelegramLogsHandler(bot=log_bot, chat_id=env.str("CHAT_ID")))
 
     updater = Updater(env.str("TELEGRAM_BOT_TOKEN"))
 

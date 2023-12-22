@@ -28,26 +28,22 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
         display_name=display_name, training_phrases=training_phrases, messages=[message]
     )
 
-    return intents_client.create_intent(
-        request={"parent": parent, "intent": intent}
-    )
+    return intents_client.create_intent(request={"parent": parent, "intent": intent})
 
 
 if __name__ == "__main__":
     env = Env()
     env.read_env()
 
-    logger = logging.getLogger('logger')
-    log_bot = telegram.Bot(token=env.str('LOG_BOT_TOKEN'))
+    logger = logging.getLogger("logger")
+    log_bot = telegram.Bot(token=env.str("LOG_BOT_TOKEN"))
 
     logging.basicConfig(format="%(levelname)s::%(message)s", level=logging.ERROR)
-    logger.addHandler(TelegramLogsHandler(
-        bot=log_bot,
-        chat_id=env.str("CHAT_ID")
-    )
-    )
+    logger.addHandler(TelegramLogsHandler(bot=log_bot, chat_id=env.str("CHAT_ID")))
 
-    parser = argparse.ArgumentParser(description="Создает Intent в DialogFlow для дальнейшего обучения данных.")
+    parser = argparse.ArgumentParser(
+        description="Создает Intent в DialogFlow для дальнейшего обучения данных."
+    )
     parser.add_argument("json_path", help="Путь до Json файла с данными.")
     args = parser.parse_args()
 
@@ -63,7 +59,7 @@ if __name__ == "__main__":
                 project_id=env.str("GOOGLE_PROJECT_ID"),
                 display_name=category,
                 training_phrases_parts=questions,
-                message_texts=answer
+                message_texts=answer,
             )
         except InvalidArgument:
             logger.error(f"Intent with the display name {category} already exists.")
